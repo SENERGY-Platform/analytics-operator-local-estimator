@@ -11,6 +11,7 @@
 #  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
+import typing
 from datetime import datetime, timedelta, timezone
 
 from senergy_local_analytics import App, Input, Output
@@ -31,7 +32,7 @@ def predict(target_timestamp):
     return pred[0]
 
 
-def process(inputs: list[Input]):
+def process(inputs: typing.List[Input]):
     today = datetime.utcnow().date()
     eoy = datetime(today.year, 12, 31)
     eom = datetime(today.year, today.month, 1) + relativedelta(months=1)
