@@ -47,7 +47,7 @@ jobs:
         with:
           context: .
           file: ./Dockerfile_alpine
-          platforms: linux/amd64,linux/arm/v6,linux/arm/v7
+          platforms: linux/arm/v6,linux/arm/v7
           push: true
           tags: |
             smartenergyplatform/analytics-operator-local-estimator:alpine
