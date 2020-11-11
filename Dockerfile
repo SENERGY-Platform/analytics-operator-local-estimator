@@ -1,15 +1,6 @@
-FROM python:3.7-slim
+FROM python:3.7
 
 ADD . /opt/app
 WORKDIR /opt/app
-RUN apt-get update && \
-    apt-get install -y \
-        build-essential \
-        make \
-        gcc \
-    && pip install numpy \
-    && pip install --no-cache-dir -r requirements.txt \
-    && apt-get remove -y --purge make gcc build-essential \
-    && apt-get autoremove -y \
-    && rm -rf /var/lib/apt/lists/*
+RUN pip install --no-cache-dir -r requirements.txt
 CMD [ "python", "./main.py" ]
