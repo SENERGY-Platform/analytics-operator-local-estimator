@@ -7,8 +7,8 @@ RUN apt-get update && \
         build-essential \
         make \
         gcc \
-    && pip install numpy \
-    && pip install --no-cache-dir -r requirements.txt \
+    && pip install numpy --extra-index-url https://www.piwheels.org/simple \
+    && pip install --no-cache-dir -r requirements.txt --extra-index-url https://www.piwheels.org/simple \
     && apt-get remove -y --purge make gcc build-essential \
     && apt-get autoremove -y \
     && rm -rf /var/lib/apt/lists/*
