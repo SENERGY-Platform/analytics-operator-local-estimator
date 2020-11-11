@@ -2,14 +2,6 @@ FROM python:3.7-slim
 
 ADD . /opt/app
 WORKDIR /opt/app
-RUN apt-get update && \
-    apt-get install -y \
-        build-essential \
-        make \
-        gcc \
-    && pip install numpy --extra-index-url https://www.piwheels.org/simple \
-    && pip install --no-cache-dir -r requirements.txt --extra-index-url https://www.piwheels.org/simple \
-    && apt-get remove -y --purge make gcc build-essential \
-    && apt-get autoremove -y \
-    && rm -rf /var/lib/apt/lists/*
+RUN pip install numpy --extra-index-url https://www.piwheels.org/simple \
+    && pip install --no-cache-dir -r requirements.txt --extra-index-url https://www.piwheels.org/simple
 CMD [ "python", "./main.py" ]
