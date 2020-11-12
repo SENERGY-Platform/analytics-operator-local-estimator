@@ -2,7 +2,7 @@ FROM python:3.7-slim
 
 ADD . /opt/app
 WORKDIR /opt/app
-RUN apt-get update -y && apt-get install -y libatlas-base-dev python-dev libgomp1 libjpeg62
+RUN apt-get update -y && apt-get install -y libatlas-base-dev python-dev libgomp1 libjpeg62 libopenjp2-7
 RUN pip install numpy --extra-index-url https://www.piwheels.org/simple \
     && pip install --no-cache-dir -r requirements.txt --extra-index-url https://www.piwheels.org/simple
 CMD [ "python", "./main.py" ]
