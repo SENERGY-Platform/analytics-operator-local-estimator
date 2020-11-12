@@ -34,7 +34,8 @@ jobs:
           push: true
           tags: |
             smartenergyplatform/analytics-operator-local-estimator:slim
-      - name: Build and push latest
+      -
+        name: Build and push latest
           uses: docker/build-push-action@v2
           with:
             context: .
@@ -43,7 +44,8 @@ jobs:
             push: true
             tags: |
               smartenergyplatform/analytics-operator-local-estimator:latest
-      - name: Build and push alpine
+      -
+        name: Build and push alpine
         uses: docker/build-push-action@v2
         with:
           context: .
