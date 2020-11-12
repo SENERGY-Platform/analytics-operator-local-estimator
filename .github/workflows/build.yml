@@ -24,15 +24,6 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      - name: Build and push latest
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          file: ./Dockerfile
-          platforms: linux/amd64,linux/arm/v6,linux/arm/v7
-          push: true
-          tags: |
-            smartenergyplatform/analytics-operator-local-estimator:latest
       -
         name: Build and push slim
         uses: docker/build-push-action@v2
@@ -43,6 +34,15 @@ jobs:
           push: true
           tags: |
             smartenergyplatform/analytics-operator-local-estimator:slim
+      - name: Build and push latest
+          uses: docker/build-push-action@v2
+          with:
+            context: .
+            file: ./Dockerfile
+            platforms: linux/amd64,linux/arm/v6,linux/arm/v7
+            push: true
+            tags: |
+              smartenergyplatform/analytics-operator-local-estimator:latest
       - name: Build and push alpine
         uses: docker/build-push-action@v2
         with:
