@@ -41,14 +41,25 @@ def process(inputs: typing.List[Input]):
     value = 0
     dt = datetime.now()
     timestamp = dt.replace(tzinfo=timezone.utc).timestamp()
+    ts = ""
+    message_id = ""
     for inp in inputs:
         if inp.name == "value" and inp.current_value is not None:
             value = inp.current_value
+        if inp.name == "timestamp" and inp.current_value is not None:
+            ts = inp.current_value
+        if inp.name == "message_id" and inp.current_value is not None:
+            message_id = inp.current_value
     train(value, timestamp)
     pred_day = predict(eod.replace(tzinfo=timezone.utc).timestamp())
     pred_month = predict(eom.replace(tzinfo=timezone.utc).timestamp())
     pred_year = predict(eoy.replace(tzinfo=timezone.utc).timestamp())
-    return Output(True, {"pred_day": pred_day, "pred_month": pred_month, "pred_year": pred_year})
+    return Output(True, {"pred_day": pred_day, "pred_day_timestamp": str(eod),
+                         "pred_month": pred_month, "pred_month_timestamp": str(eom),
+                         "pred_year": pred_year, "pred_year_timestamp": str(eoy),
+                         "message_id": message_id,
+                         "timestamp": ts
+                         })
 
 
 if __name__ == '__main__':
@@ -56,8 +67,9 @@ if __name__ == '__main__':
 
     input1 = Input("value")
     input2 = Input("timestamp")
+    input3 = Input("message_id")
 
-    app.config([input1, input2])
+    app.config([input1, input2, input3])
     print("start operator", flush=True)
     app.process_message(process)
     app.main()
