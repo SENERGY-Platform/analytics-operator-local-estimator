@@ -39,7 +39,7 @@ jobs:
           push: true
           tags: |
             smartenergyplatform/analytics-operator-local-estimator:latest
-            ghcr.io/senergy-platform/analytics-operator-local-estimator-simple:latest
+            ghcr.io/senergy-platform/analytics-operator-local-estimator:latest
       -
         name: Build and push slim
         uses: docker/build-push-action@v2
@@ -50,7 +50,7 @@ jobs:
           push: true
           tags: |
             smartenergyplatform/analytics-operator-local-estimator:slim
-            ghcr.io/senergy-platform/analytics-operator-local-estimator-simple:slim
+            ghcr.io/senergy-platform/analytics-operator-local-estimator:slim
       -
         name: Build and push alpine
         uses: docker/build-push-action@v2
@@ -61,4 +61,4 @@ jobs:
           push: true
           tags: |
             smartenergyplatform/analytics-operator-local-estimator:alpine
-            ghcr.io/senergy-platform/analytics-operator-local-estimator-simple:alpine
+            ghcr.io/senergy-platform/analytics-operator-local-estimator:alpine
