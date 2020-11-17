@@ -15,11 +15,11 @@ import typing
 from datetime import datetime, timedelta, timezone
 
 from senergy_local_analytics import App, Input, Output
-from skmultiflow.trees import HoeffdingTreeRegressor
+from skmultiflow.meta import AdaptiveRandomForestRegressor
 import numpy as np
 from dateutil.relativedelta import *
 
-ht_reg = HoeffdingTreeRegressor()
+ht_reg = AdaptiveRandomForestRegressor()
 
 
 def train(value, current_timestamp):
@@ -39,8 +39,6 @@ def process(inputs: typing.List[Input]):
     eod = datetime(today.year, today.month, today.day) + timedelta(days=1)
 
     value = 0
-    dt = datetime.now()
-    timestamp = dt.replace(tzinfo=timezone.utc).timestamp()
     ts = ""
     message_id = ""
     for inp in inputs:
@@ -50,6 +48,7 @@ def process(inputs: typing.List[Input]):
             ts = inp.current_value
         if inp.name == "message_id" and inp.current_value is not None:
             message_id = inp.current_value
+    timestamp = datetime.strptime(ts, '%Y-%m-%dT%H:%M:%S.%fZ').replace(tzinfo=timezone.utc).timestamp()
     train(value, timestamp)
     pred_day = predict(eod.replace(tzinfo=timezone.utc).timestamp())
     pred_month = predict(eom.replace(tzinfo=timezone.utc).timestamp())
